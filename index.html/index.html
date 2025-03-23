@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-list li {
+            padding: 10px;
+            margin: 5px;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .task-list li:hover {
+            background: #d9d9d9;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            color: blue;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Project Tasks</h2>
+    <ul class="task-list">
+        <li onclick='task-1'>Task 1</li>
+        <li onclick='task-2'>Task 2</li>
+        <li onclick='task-3'>Task 3</li>
+        <li onclick='task-4'>Task 4</li>
+        <li onclick='task-5'>Task 5</li>
+        <li onclick='task-6'>Task 6</li>
+        <li onclick='task-7'>Task 7</li>
+        <li onclick='task-8'>Task 8</li>
+        <li onclick='task-9'>Task 9</li>
+        <li onclick='task-10'>Task 10</li>
+        <li onclick='task-11'>Task 11</li>
+        <li onclick='task-12'>Task 12</li>
+        <li onclick='task-13'>Task 13</li>
+        <li onclick='task-14'>Task 14</li>
+        <li onclick='task-15'>Task 15</li>
+        <li onclick='task-16'>Task 16</li>
+    </ul>
+
+    <div id="output">Click on a task to see its content.</div>
+
+    <script>
+        
+        // Define the relative URLs (served by local server)
+        const Project = {
+            'task-1': '/Project/task-1/index.html',
+            'task-2': '/Project/task-2/index.html',
+            'task-3': '/Project/task-3/index.html',
+            'task-4': '/Project/task-4/index.html',
+            'task-5': '/Project/task-5/index.html',
+            'task-6': '/Project/task-6/index.html',
+            'task-7': '/Project/task-7/index.html',
+            'task-8': '/Project/task-8/index.html',
+            'task-9': '/Project/task-9/index.html',
+            'task-10': '/Project/task-10/index.html',
+            'task-11': '/Project/task-11/index.html',
+            'task-12': '/Project/task-12/index.html',
+            'task-13': '/Project/task-13/index.html',
+            'task-14': '/Project/task-14/index.html',
+            'task-15': '/Project/task-15/index.html',
+            'task-16': '/Project/task-16/index.html',
+        };
+
+        document.getElementById("taskList").addEventListener("onclick", function(event) {
+            const taskId = event.target.getAttribute("onclick");
+            if (taskId && Project[taskId]) {
+                fetch(Project[taskId])
+                    .then(response => {
+                        if (!response.ok) throw new Error("Failed to load task.");
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById("output").innerHTML = data;
+                    })
+                    .catch(error => {
+                        document.getElementById("output").innerHTML = "<p style='color:red;'>Error loading task content.</p>";
+                        console.error('Error:', error);
+                    });
+            }
+        });
+        
+    </script>
+
+</body>
+</html>
